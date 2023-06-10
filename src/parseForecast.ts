@@ -1,26 +1,29 @@
-import {XMLParser} from 'fast-xml-parser';
-import {camelCase, pascalCase} from 'change-case';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-continue */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-restricted-syntax */
 
-export function parseToJsObj(xmlText: string) {
+import { XMLParser } from 'fast-xml-parser';
+import { camelCase, pascalCase } from 'change-case';
+
+const parseToJsObj = (xmlText: string) => {
 	const parseOptions = {
 		ignoreAttributes: false,
 		parseAttributeValue: true,
 		attributesGroupName: '@',
 		attributeNamePrefix: '',
 	};
-
 	const parser = new XMLParser(parseOptions);
 	const jsObj = parser.parse(xmlText);
-
 	return jsObj;
-}
+};
 
-export function extractParameters(forecast: any) {
+const extractParameters = (forecast: any) => {
 	const startTimes = forecast.dwml.data['time-layout']['start-valid-time'];
 	const endTimes = forecast.dwml.data['time-layout']['end-valid-time'];
 	const output = [];
 
-	// eslint-disable-next-line no-plusplus
 	for (let index = 0; index < startTimes.length; index++) {
 		output.push({
 			startTime: new Date(startTimes[index]),
@@ -28,10 +31,8 @@ export function extractParameters(forecast: any) {
 		});
 	}
 
-	// eslint-disable-next-line no-restricted-syntax
 	for (const key in forecast.dwml.data.parameters) {
 		if (key === 'weather' || key === '@')
-			// eslint-disable-next-line no-continue
 			continue;
 
 		const values1 = forecast.dwml.data.parameters[key];
@@ -53,15 +54,13 @@ export function extractParameters(forecast: any) {
 				const measurement = itemValues[jj];
 				if (typeof measurement === 'object') {
 					if (measurement['@']['xsi:nil']) {
-						// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 						// @ts-ignore
 						output[jj][metric] = null;
 					} else {
 						throw new Error('Unexpected element');
 					}
 				} else {
-					// eslint-disable-next-line indent, @typescript-eslint/ban-ts-comment
-            // @ts-ignore
+					// @ts-ignore
 					output[jj][metric] = measurement;
 				}
 			}
@@ -69,12 +68,29 @@ export function extractParameters(forecast: any) {
 	}
 
 	return output;
+};
+
+export interface ParseForecastOutput {
+  dewPointTemperature: number;
+  endTime: Date;
+  floatingHourlyQpf: number;
+  floatingProbabilityOfPrecipitation: number;
+  gustWindSpeed: number | null;
+  heatIndexTemperature: number;
+  hourlyTemperature: number;
+  relativeHumidity: number;
+  startTime: Date;
+  sustainedWindSpeed: number;
+  totalCloudAmount: number;
+  windDirection: number;
 }
 
-export function parseForecast(xmlText: string) {
+const parseForecast = (xmlText: string): ParseForecastOutput[] => {
 	const raw = parseToJsObj(xmlText);
 	const nice = extractParameters(raw);
-	return nice;
+	return nice as unknown as ParseForecastOutput[];
 };
+
+export default parseForecast;
 
 
