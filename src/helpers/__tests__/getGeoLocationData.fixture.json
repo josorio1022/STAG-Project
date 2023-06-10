@@ -1,0 +1,117 @@
+{
+    "data": [
+        {
+            "place_id": 302595686,
+            "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+            "boundingbox": [
+                "41.762375584081",
+                "42.082375584081",
+                "-87.811135225224",
+                "-87.491135225224"
+            ],
+            "lat": "41.92237558408072",
+            "lon": "-87.65113522522422",
+            "display_name": "Chicago, Cook County, Illinois, 60614, Estados Unidos de América",
+            "place_rank": 21,
+            "category": "place",
+            "type": "postcode",
+            "importance": 0.33499999999999996
+        },
+        {
+            "place_id": 302449055,
+            "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+            "boundingbox": [
+                "52.263083985714",
+                "52.583083985714",
+                "16.748050380952",
+                "17.068050380952"
+            ],
+            "lat": "52.423083985714285",
+            "lon": "16.908050380952382",
+            "display_name": "Sołacz, Poznań, Voivodato de Gran Polonia, 60-614, Polonia",
+            "place_rank": 25,
+            "category": "place",
+            "type": "postcode",
+            "importance": 0.125
+        },
+        {
+            "place_id": 64915988,
+            "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+            "osm_type": "node",
+            "osm_id": 6010970607,
+            "boundingbox": [
+                "45.515204",
+                "45.515304",
+                "-73.552146",
+                "-73.552046"
+            ],
+            "lat": "45.515254",
+            "lon": "-73.552096",
+            "display_name": "Atateken / Viger, Autoroute Ville-Marie, Gay Village, Ville-Marie, Montreal, Urban agglomeration of Montreal, Montreal (administrative region), Quebec, H2L 2P5, Canadá",
+            "place_rank": 30,
+            "category": "highway",
+            "type": "bus_stop",
+            "importance": 0.00000999999999995449,
+            "icon": "https://nominatim.openstreetmap.org/ui/mapicons/transport_bus_stop2.p.20.png"
+        },
+        {
+            "place_id": 12331472,
+            "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+            "osm_type": "node",
+            "osm_id": 1288482266,
+            "boundingbox": [
+                "49.8507585",
+                "49.8508585",
+                "-97.2926437",
+                "-97.2925437"
+            ],
+            "lat": "49.8508085",
+            "lon": "-97.2925937",
+            "display_name": "Westbound Rannock at Vanscoy, Rannock Avenue, Roblin Park, Winnipeg, Division No. 11, Manitoba, R3R 1C4, Canadá",
+            "place_rank": 30,
+            "category": "highway",
+            "type": "bus_stop",
+            "importance": 0.00000999999999995449,
+            "icon": "https://nominatim.openstreetmap.org/ui/mapicons/transport_bus_stop2.p.20.png"
+        }
+    ],
+    "status": 200,
+    "statusText": "",
+    "headers": {
+        "content-type": "application/json; charset=UTF-8"
+    },
+    "config": {
+        "transitional": {
+            "silentJSONParsing": true,
+            "forcedJSONParsing": true,
+            "clarifyTimeoutError": false
+        },
+        "adapter": [
+            "xhr",
+            "http"
+        ],
+        "transformRequest": [
+            null
+        ],
+        "transformResponse": [
+            null
+        ],
+        "timeout": 0,
+        "xsrfCookieName": "XSRF-TOKEN",
+        "xsrfHeaderName": "X-XSRF-TOKEN",
+        "maxContentLength": -1,
+        "maxBodyLength": -1,
+        "env": {},
+        "headers": {
+            "Accept": "application/json, text/plain, */*"
+        },
+        "params": {
+            "q": "60614",
+            "polygon_geojson": 0,
+            "format": "jsonv2"
+        },
+        "method": "get",
+        "url": "https://nominatim.openstreetmap.org/search.php"
+    },
+    "request": {}
+}

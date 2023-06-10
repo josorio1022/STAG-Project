@@ -2,7 +2,6 @@ import axios from 'axios';
 import { format, getDay } from 'date-fns';
 import parseForecast from './parseForecast';
 
-
 export interface GeoLocationData {
   boundingbox: [string, string, string, string];
   category: string;
@@ -50,7 +49,6 @@ const getDayOfWeek = (startTime: Date) => {
 		throw new Error('Invalid day');
 	}
 };
-
 
 interface WeatherData {
 	dayOfWeek: string;

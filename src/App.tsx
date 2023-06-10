@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useState } from 'react';
-import { GeoLocationData, WeatherForecastData, getFirstGeoLocationData, getWeatherForecastData } from './utils';
+import { GeoLocationData, WeatherForecastData, getFirstGeoLocationData, getWeatherForecastData } from './helpers/utils';
 
 export default function App() {
 	const [search, setSearch] = useState('');
