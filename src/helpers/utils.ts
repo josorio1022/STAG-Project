@@ -50,7 +50,7 @@ const getDayOfWeek = (startTime: Date) => {
 	}
 };
 
-interface WeatherData {
+export interface WeatherData {
 	dayOfWeek: string;
   dewPointTemperature: number;
   endDate: string;
@@ -64,14 +64,14 @@ interface WeatherData {
   sustainedWindSpeed: number;
   totalCloudAmount: number;
   windDirection: number;
+	startTime: Date;
 }
 
-// Define the type for the object.
-type GroupedWeatherData = {
+export type GroupedWeatherData = {
   [date: string]: WeatherData[];
 }
 
-interface DailyWeatherData {
+export interface DailyWeatherData {
   dayOfWeek: string;
   dewPointTemperature: number;
   endDate: string;
@@ -102,11 +102,13 @@ export const getWeatherForecastData = async (geoLocationData: GeoLocationData) =
 		}
 	}).then(response => parseForecast(response.data));
 
-	const formattedWeatherData = weatherData
+	return weatherData
 		.map(({ startTime, endTime, ...rest }) => ({
 			dayOfWeek: getDayOfWeek(startTime),
 			startDate: format(startTime, 'd LLL'),
 			endDate: format(endTime, 'd LLL'),
+			startTime,
+			endTime,
 			...rest,
 		})).reduce<GroupedWeatherData>((acc, data) => {
 			if (acc[data.startDate]) {
@@ -117,18 +119,18 @@ export const getWeatherForecastData = async (geoLocationData: GeoLocationData) =
 
 			return acc;
 		}, {});
-
-	return Object.entries(formattedWeatherData).reduce<WeatherForecastData>((acc, [key, values]: [string, WeatherData[]]) => {
-		const temps = values.map(({ hourlyTemperature }) => hourlyTemperature);
-		const maxTemperature = Math.max(...temps);
-		const minTemperature = Math.min(...temps);
-    
-		acc[key] = { 
-			maxTemperature,
-			minTemperature,
-			...values[0],
-		};
-    
-		return acc;
-	}, {});
 };
+
+export const formatWeatherForecastData = (weatherForecastData: GroupedWeatherData) => Object.entries(weatherForecastData).reduce<WeatherForecastData>((acc, [key, values]: [string, WeatherData[]]) => {
+	const temps = values.map(({ hourlyTemperature }) => hourlyTemperature);
+	const maxTemperature = Math.max(...temps);
+	const minTemperature = Math.min(...temps);
+    
+	acc[key] = { 
+		maxTemperature,
+		minTemperature,
+		...values[0],
+	};
+    
+	return acc;
+}, {});

@@ -1,6 +1,9 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+
 import { WeatherForecastData } from '../helpers/utils';
 
-export default function SummaryTable({ weatherData = {} }: { weatherData: WeatherForecastData }) {
+export default function SummaryTable({ weatherData = {}, onCellClick }: { weatherData: WeatherForecastData, onCellClick: (date: string) => void }) {
 	const tableHeaders = Object.keys(weatherData);
 
 	return 	<div>
@@ -18,7 +21,9 @@ export default function SummaryTable({ weatherData = {} }: { weatherData: Weathe
 					{
 						tableHeaders.map(tableHeader => (
 							<td key={tableHeader}>
-								<div>
+								<div style={{
+									cursor: 'pointer'
+								}} onClick={() => onCellClick(tableHeader)}>
 									<p>
                       Day: {weatherData[tableHeader]?.dayOfWeek}
 									</p>
